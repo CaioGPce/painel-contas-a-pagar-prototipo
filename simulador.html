@@ -765,7 +765,476 @@ textarea.form-control {
 }
 
 .btn:not(.btn-primary, .viz-tile):is(
-    [aria-pressed="tru…15635 tokens truncated…ocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/></Types>',
+    [aria-pressed="true"],
+    [aria-selected="true"],
+    .is-selected
+  ) {
+  border-color: var(--primary);
+  color: var(--primary-foreground);
+  background: var(--primary);
+}
+
+.btn.viz-tile:is([aria-pressed="true"], [aria-selected="true"], .is-selected) {
+  border-color: var(--primary);
+  box-shadow: inset 0 0 0 1px var(--primary);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+#widget > svg {
+  width: 100%;
+}
+
+.text-warning,
+.text-destructive {
+  color: var(--destructive);
+}
+
+html>body{padding:6px}</style>
+</head>
+<body>
+<div id="gp-payables">
+  <style>
+    html > body.modal-open { overflow:hidden; }
+    #gp-payables { width:100%; min-height:100vh; padding:10px 12px; color:var(--foreground); background:linear-gradient(145deg,color-mix(in srgb,var(--primary) 7%,var(--background)),var(--background) 38%,color-mix(in srgb,var(--viz-series-6) 5%,var(--background))); font-size:var(--font-size-base); --primary:light-dark(rgb(34 78 108),rgb(139 196 232)); --accent:light-dark(rgb(233 241 246),rgb(24 44 57)); --status-cancel:light-dark(rgb(190 52 64),rgb(255 112 122)); }
+    #gp-payables * { box-sizing:border-box; }
+    #gp-payables h2, #gp-payables h3, #gp-payables p { margin-top:0; }
+    #gp-payables .topbar, #gp-payables .section-head, #gp-payables .detail-head, #gp-payables .actions, #gp-payables .status-line { display:flex; align-items:center; gap:7px; }
+    #gp-payables .topbar, #gp-payables .section-head, #gp-payables .detail-head { justify-content:space-between; flex-wrap:wrap; }
+    #gp-payables .topbar { padding:7px 12px; border:1px solid color-mix(in srgb,var(--foreground) 11%,transparent); border-radius:9px; background:linear-gradient(155deg,color-mix(in srgb,var(--popover) 94%,var(--primary)),var(--popover) 58%,color-mix(in srgb,var(--popover) 95%,var(--foreground))); box-shadow:0 10px 24px -18px rgb(0 0 0 / 58%),inset 0 1px 0 rgb(255 255 255 / 24%); }
+    #gp-payables .brand { display:flex; align-items:center; gap:7px; }
+    #gp-payables .brand-mark { display:grid; place-items:center; width:32px; height:32px; border-radius:8px; color:var(--primary-foreground); background:linear-gradient(145deg,color-mix(in srgb,var(--primary) 72%,white),var(--primary) 58%,color-mix(in srgb,var(--primary) 78%,black)); box-shadow:0 7px 14px -8px var(--primary),inset 0 1px 0 rgb(255 255 255 / 38%),inset 0 -2px 3px rgb(0 0 0 / 14%); }
+    #gp-payables .brand-copy strong, #gp-payables .brand-copy span { display:block; }
+    #gp-payables .section-band { --section-color:var(--viz-series-1); padding:5px 12px; border:1px solid color-mix(in srgb,var(--section-color) 24%,var(--border)); border-radius:7px; background:linear-gradient(155deg,color-mix(in srgb,var(--section-color) 12%,var(--popover)),color-mix(in srgb,var(--section-color) 5%,var(--popover))); box-shadow:0 7px 18px -17px rgb(0 0 0 / 64%),inset 0 1px 0 rgb(255 255 255 / 24%); }
+    #gp-payables .section-band h2, #gp-payables .section-band h3, #gp-payables .section-band strong { color:var(--foreground); }
+    #gp-payables .tone-validation { --section-color:var(--viz-series-1); }
+    #gp-payables .tone-values { --section-color:var(--viz-series-5); }
+    #gp-payables .tone-allocation { --section-color:var(--viz-series-6); }
+    #gp-payables .tone-costs { --section-color:var(--viz-series-3); }
+    #gp-payables .tone-taxes { --section-color:var(--viz-series-2); }
+    #gp-payables .tone-review { --section-color:var(--viz-series-4); }
+    #gp-payables .summary .viz-stat { border-top:3px solid color-mix(in srgb,var(--stat-color,var(--viz-series-1)) 70%,transparent); background:color-mix(in srgb,var(--stat-color,var(--viz-series-1)) 7%,var(--card)); }
+    #gp-payables .stat-waiting { --stat-color:var(--viz-series-1); }
+    #gp-payables .stat-valid { --stat-color:var(--viz-series-3); }
+    #gp-payables .stat-review { --stat-color:var(--viz-series-2); }
+    #gp-payables .stat-cancel { --stat-color:var(--destructive); }
+    #gp-payables .tabs { display:flex; gap:4px; margin:6px 0; border-bottom:1px solid var(--border); padding:0 1px 4px; flex-wrap:wrap; }
+    #gp-payables .view { display:none; }
+    #gp-payables .view.is-active { display:block; }
+    #gp-payables .summary { grid-template-columns:repeat(4,minmax(0,1fr)); gap:5px; margin:5px 0 7px; }
+    #gp-payables #view-validation > .summary { display:none; }
+    #gp-payables .summary .card { padding:5px 10px; }
+    #gp-payables .workspace { display:block; }
+    #gp-payables .table tbody tr { cursor:pointer; }
+    #gp-payables .table tbody tr:hover, #gp-payables .table tbody tr[aria-selected="true"] { background:var(--accent); color:var(--foreground); }
+    #gp-payables .table-responsive { border:1px solid color-mix(in srgb,var(--foreground) 10%,transparent); border-radius:9px; background:linear-gradient(155deg,color-mix(in srgb,var(--popover) 96%,var(--primary)),var(--popover)); box-shadow:0 13px 28px -23px rgb(0 0 0 / 72%),inset 0 1px 0 rgb(255 255 255 / 22%); overflow:auto; }
+    #gp-payables .ap-list-table th { white-space:nowrap; }
+    #gp-payables .ap-list-table th { background:linear-gradient(180deg,color-mix(in srgb,var(--muted) 75%,var(--popover)),var(--muted)); color:var(--foreground); box-shadow:inset 0 -1px 0 var(--border),inset 0 1px 0 rgb(255 255 255 / 20%); }
+    #gp-payables .ap-list-table td { vertical-align:middle; }
+    #gp-payables .entry-notes-table { width:100%; table-layout:fixed; font-size:11px; line-height:1.2; }
+    #gp-payables .entry-notes-table :is(th,td) { padding:3px 4px; overflow-wrap:anywhere; }
+    #gp-payables .entry-notes-table :is(th,td):first-child { padding-inline-start:8px; }
+    #gp-payables .entry-notes-table :is(th,td):last-child { padding-inline-end:8px; }
+    #gp-payables .entry-notes-table .text-small { font-size:11px; line-height:1.15; }
+    #gp-payables .entry-notes-table th:nth-child(1), #gp-payables .entry-notes-table td:nth-child(1) { width:6%; }
+    #gp-payables .entry-notes-table th:nth-child(2), #gp-payables .entry-notes-table td:nth-child(2) { width:8%; }
+    #gp-payables .entry-notes-table th:nth-child(3), #gp-payables .entry-notes-table td:nth-child(3) { width:10%; }
+    #gp-payables .entry-notes-table th:nth-child(4), #gp-payables .entry-notes-table td:nth-child(4) { width:9%; }
+    #gp-payables .entry-notes-table th:nth-child(5), #gp-payables .entry-notes-table td:nth-child(5) { width:10%; }
+    #gp-payables .entry-notes-table th:nth-child(6), #gp-payables .entry-notes-table td:nth-child(6) { width:6.5%; }
+    #gp-payables .entry-notes-table th:nth-child(n+7):nth-child(-n+12), #gp-payables .entry-notes-table td:nth-child(n+7):nth-child(-n+12) { width:5%; }
+    #gp-payables .entry-notes-table th:nth-child(13), #gp-payables .entry-notes-table td:nth-child(13) { width:7%; }
+    #gp-payables .entry-notes-table th:nth-child(14), #gp-payables .entry-notes-table td:nth-child(14) { width:6.5%; }
+    #gp-payables .entry-notes-table th:nth-child(15), #gp-payables .entry-notes-table td:nth-child(15) { width:7%; }
+    #gp-payables .entry-notes-table td:nth-child(n+6):nth-child(-n+14) { white-space:nowrap; }
+    #gp-payables .entry-notes-table .credit-decision { min-height:23px; padding:0 17px 0 4px; font-size:11px; background-position:calc(100% - 9px) 50%,calc(100% - 6px) 50%; }
+    #gp-payables .entry-notes-table tbody tr.credit-eligible { background:color-mix(in srgb,var(--viz-series-3) 15%,var(--popover)); }
+    #gp-payables .entry-notes-table tbody tr.credit-eligible:hover { background:color-mix(in srgb,var(--viz-series-3) 23%,var(--popover)); }
+    #gp-payables .doc-button { text-align:left; }
+    #gp-payables .doc-meta, #gp-payables .subtle { color:var(--muted-foreground); }
+    #gp-payables .doc-meta .status-line { display:inline-flex; }
+    #gp-payables .status-dot { width:8px; height:8px; border-radius:50%; background:currentColor; flex:0 0 auto; }
+    #gp-payables .status-valid { color:var(--viz-series-3); }
+    #gp-payables .status-review { color:var(--viz-series-2); }
+    #gp-payables .status-cancel { color:var(--status-cancel); }
+    #gp-payables .status-process { color:var(--viz-series-1); }
+    #gp-payables:has(.detail.is-open)::before { content:""; position:fixed; inset:0; z-index:90; background:light-dark(rgb(17 29 38 / 46%),rgb(0 0 0 / 66%)); }
+    #gp-payables .detail { display:none; position:fixed; z-index:100; top:50%; left:50%; transform:translate(-50%,-50%); width:min(1280px,calc(100% - 24px)); max-height:calc(100% - 24px); overflow-y:auto; overscroll-behavior:contain; border:1px solid color-mix(in srgb,var(--primary) 34%,var(--border)); border-radius:12px; background:linear-gradient(145deg,color-mix(in srgb,var(--popover) 94%,var(--primary)),var(--popover) 42%,color-mix(in srgb,var(--popover) 96%,var(--foreground))); box-shadow:0 34px 80px -24px rgb(0 0 0 / 72%),0 12px 28px -18px var(--primary),inset 0 1px 0 rgb(255 255 255 / 30%); }
+    #gp-payables .detail.is-open { display:block; }
+    #gp-payables .detail-head { position:sticky; top:-13px; z-index:2; margin:-13px -13px 8px; padding:8px 13px; background:linear-gradient(150deg,color-mix(in srgb,var(--popover) 91%,var(--primary)),var(--popover)); border:0; border-bottom:1px solid color-mix(in srgb,var(--primary) 26%,var(--border)); border-radius:12px 12px 0 0; box-shadow:0 8px 18px -18px rgb(0 0 0 / 70%),inset 0 1px 0 rgb(255 255 255 / 28%); }
+    #gp-payables .detail h3 { margin:2px 0 0; }
+    #gp-payables .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:4px 7px; margin:5px 0; }
+    #gp-payables .form-grid .wide { grid-column:1 / -1; }
+    #gp-payables .detail .form-control, #gp-payables .detail .form-select { background:color-mix(in srgb,var(--popover) 92%,var(--foreground)); box-shadow:inset 0 2px 4px rgb(0 0 0 / 7%),0 1px 0 rgb(255 255 255 / 18%); }
+    #gp-payables .field-hint { display:block; margin-top:2px; color:var(--muted-foreground); }
+    #gp-payables .subsection { margin-top:6px; padding-top:5px; border-top:1px solid var(--border); }
+    #gp-payables .tax-toggle { margin:0; }
+    #gp-payables .tax-compact-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:4px 7px; margin:5px 0; }
+    #gp-payables .tax-compact-grid > .tax-fields { display:contents; }
+    #gp-payables .tax-compact-grid > .tax-fields.is-hidden { display:none; }
+    #gp-payables .tax-fields { display:grid; grid-template-columns:1fr 1fr; gap:4px 7px; }
+    #gp-payables .tax-fields.is-hidden { display:none; }
+    #gp-payables .allocation-row { display:grid; grid-template-columns:minmax(0,1fr) minmax(110px,.45fr) auto; gap:4px; align-items:end; margin-top:4px; }
+    #gp-payables .allocation-total { display:flex; justify-content:space-between; gap:7px; margin-top:5px; padding-top:5px; border-top:1px solid var(--border); }
+    #gp-payables .validation-box { margin-top:6px; padding:6px 10px; border:1px solid color-mix(in srgb,var(--viz-series-3) 45%,var(--border)); border-radius:8px; background:linear-gradient(145deg,color-mix(in srgb,var(--viz-series-3) 12%,var(--popover)),color-mix(in srgb,var(--viz-series-3) 5%,var(--popover))); box-shadow:0 8px 18px -18px rgb(0 0 0 / 65%),inset 0 1px 0 rgb(255 255 255 / 24%); }
+    #gp-payables .validation-box.is-review { border-left-color:var(--viz-series-4); background:color-mix(in srgb,var(--viz-series-4) 12%,transparent); }
+    #gp-payables .validation-box.is-error { border-left-color:var(--destructive); background:color-mix(in srgb,var(--destructive) 10%,transparent); }
+    #gp-payables .actions { margin-top:5px; flex-wrap:wrap; }
+    #gp-payables .topbar .btn, #gp-payables .tabs .btn, #gp-payables .detail .actions .btn { box-shadow:0 5px 11px -9px rgb(0 0 0 / 65%),inset 0 1px 0 rgb(255 255 255 / 22%); }
+    #gp-payables .analytics-layout { display:grid; grid-template-columns:minmax(0,1.35fr) minmax(300px,.65fr); gap:10px; align-items:start; margin-top:9px; }
+    #gp-payables .chart-wrap { min-height:190px; }
+    #gp-payables .bar-row { display:grid; grid-template-columns:minmax(90px,.38fr) minmax(130px,1fr) auto; gap:8px; align-items:center; margin:8px 0; }
+    #gp-payables .bar-track { height:18px; background:var(--muted); border-radius:999px; overflow:hidden; }
+    #gp-payables .bar-fill { height:100%; min-width:2px; background:var(--viz-series-1); border-radius:inherit; transition:width .25s ease; }
+    #gp-payables .bar-fill.tax { background:var(--viz-series-4); }
+    #gp-payables .bar-value { text-align:right; white-space:nowrap; }
+    #gp-payables .cost-timeline { display:flex; gap:6px; align-items:flex-end; min-height:125px; padding-top:10px; border-bottom:1px solid var(--border); }
+    #gp-payables .date-column { display:flex; flex:1; min-width:34px; flex-direction:column; justify-content:flex-end; align-items:center; gap:6px; height:138px; }
+    #gp-payables .date-bar { width:min(34px,80%); background:var(--viz-series-2); border-radius:5px 5px 0 0; min-height:3px; transition:height .25s ease; }
+    #gp-payables .date-label { color:var(--muted-foreground); white-space:nowrap; }
+    #gp-payables .empty { padding:16px 0; text-align:center; color:var(--muted-foreground); }
+    #gp-payables .feedback { min-height:1.2em; margin-top:4px; }
+    #gp-payables .upload-panel { display:none; margin:5px 0 7px; }
+    #gp-payables .upload-panel.is-open { display:block; }
+    #gp-payables .upload-grid { display:grid; grid-template-columns:1fr; gap:5px; margin-top:5px; }
+    #gp-payables .upload-grid .wide { grid-column:auto; }
+    #gp-payables .file-list { display:flex; flex-wrap:wrap; gap:4px; margin-top:4px; }
+    #gp-payables .file-item { display:inline-flex; align-items:center; gap:4px; padding:2px 8px; border-radius:999px; background:var(--muted); color:var(--foreground); }
+    #gp-payables .detail { padding:13px; }
+    #gp-payables .detail .form-label { margin-bottom:2px; }
+    #gp-payables .table.table-sm :is(th,td) { padding-block:3px; }
+    @media (min-width:1100px){ #gp-payables .detail .form-grid { grid-template-columns:repeat(4,1fr); } #gp-payables .detail .detail-main-grid { grid-template-columns:repeat(6,minmax(0,1fr)); } #gp-payables .detail-main-grid .detail-span-2 { grid-column:span 2; } #gp-payables .detail-main-grid .detail-span-3 { grid-column:span 3; } #gp-payables .detail-main-grid .detail-span-4 { grid-column:span 4; } #gp-payables .detail .tax-fields { grid-template-columns:repeat(3,1fr); } #gp-payables .detail .tax-compact-grid { grid-template-columns:repeat(8,minmax(0,1fr)); } }
+    @media (max-width:680px){ #gp-payables .workspace, #gp-payables .analytics-layout { grid-template-columns:1fr; } #gp-payables .summary { grid-template-columns:repeat(2,minmax(0,1fr)); } #gp-payables .detail { width:calc(100% - 16px); max-height:calc(100% - 16px); } #gp-payables .hide-mobile { display:none; } }
+    @media (max-width:480px){ #gp-payables .form-grid, #gp-payables .tax-fields, #gp-payables .summary, #gp-payables .upload-grid { grid-template-columns:1fr; } #gp-payables .upload-grid .wide, #gp-payables .form-grid .wide { grid-column:auto; } #gp-payables .allocation-row { grid-template-columns:1fr; } #gp-payables .bar-row { grid-template-columns:1fr; } #gp-payables .bar-value { text-align:left; } }
+    @media (prefers-reduced-motion:reduce){ #gp-payables .bar-fill, #gp-payables .date-bar { transition:none; } }
+  </style>
+
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark"><i data-lucide="landmark" aria-hidden="true"></i></span><span class="brand-copy"><strong>Contas a pagar</strong><span class="text-small subtle">APs recebidas e validação financeira</span></span></div>
+    <button class="btn" id="open-upload" type="button"><i data-lucide="paperclip" aria-hidden="true"></i> Adicionar AP</button>
+  </header>
+
+  <nav class="tabs" aria-label="Áreas do painel">
+    <button class="btn btn-primary" type="button" data-view="validation" aria-pressed="true"><i data-lucide="inbox" aria-hidden="true"></i> Para validar <span class="viz-badge" id="queue-count">3</span></button>
+    <button class="btn" type="button" data-view="invoices" aria-pressed="false"><i data-lucide="files" aria-hidden="true"></i> Notas de entrada</button>
+  </nav>
+
+  <section class="card upload-panel" id="upload-panel" aria-labelledby="upload-title">
+    <div class="section-head section-band tone-validation"><div><strong id="upload-title">Adicionar AP e anexos</strong><div class="text-small subtle">A IA identificará a AP, a nota ou documento de cobrança, o responsável e os demais anexos</div></div><button class="btn btn-ghost" id="close-upload" type="button">Fechar</button></div>
+    <div class="upload-grid">
+      <label class="form-label">Selecione a AP junto com a nota e todos os anexos<input class="form-control" id="upload-files" type="file" multiple accept=".pdf,.png,.jpg,.jpeg,.xlsx,.xls,.doc,.docx"></label>
+      <div class="text-small subtle">Não é necessário informar fornecedor, nota ou responsável. As informações serão extraídas automaticamente.</div>
+    </div>
+    <div class="actions"><button class="btn btn-primary" id="add-to-queue" type="button"><i data-lucide="sparkles" aria-hidden="true"></i> Enviar para análise</button><span class="feedback text-small" id="upload-feedback" aria-live="polite"></span></div>
+  </section>
+
+  <section class="view is-active" id="view-validation">
+    <div class="viz-grid summary" aria-label="Resumo da fila">
+      <section class="card viz-stat stat-waiting"><span class="text-muted">Aguardando validação</span><span class="viz-stat-value" id="stat-waiting">3</span><span class="text-small subtle">AP, BM e adiantamento</span></section>
+      <section class="card viz-stat stat-valid"><span class="text-muted">Validada</span><span class="viz-stat-value">5</span><span class="text-small status-valid">● Prontas para consulta</span></section>
+      <section class="card viz-stat stat-review"><span class="text-muted">Revisar</span><span class="viz-stat-value">2</span><span class="text-small status-review">● Com divergências</span></section>
+      <section class="card viz-stat stat-cancel"><span class="text-muted">Cancelada</span><span class="viz-stat-value">1</span><span class="text-small status-cancel">● Fora do fluxo</span></section>
+    </div>
+
+    <div class="workspace">
+      <section aria-labelledby="queue-title">
+        <div class="section-head section-band tone-validation"><div><h3 id="queue-title">APs recebidas</h3><span class="text-small subtle">APs vindas do SGAP e incluídas manualmente. Selecione uma linha para conferir a extração da IA.</span></div></div>
+        <div class="table-responsive"><table class="table table-sm ap-list-table" aria-label="APs recebidas para validação"><thead><tr><th>Fornecedor</th><th>NF</th><th>Emissão</th><th>Município</th><th>Tipo de pagamento</th><th>Data pagamento</th><th class="text-end">Vlr. bruto</th><th class="text-end">Valor líquido</th></tr></thead><tbody id="queue-body"></tbody></table></div>
+        <div class="feedback text-small" id="queue-feedback" aria-live="polite"></div>
+      </section>
+
+      <aside class="card detail" id="detail-panel" role="dialog" aria-modal="true" aria-labelledby="detail-title">
+        <div class="detail-head section-band tone-review"><div><span class="text-small subtle" id="detail-type">AP selecionada</span><h3 id="detail-title"></h3></div><div class="actions"><span class="status-line status-review" id="detail-status"><span class="status-dot"></span>Revisar</span><button class="btn btn-ghost" id="close-detail" type="button">Fechar detalhes</button></div></div>
+        <div class="form-grid detail-main-grid">
+          <label class="form-label detail-span-2">Fornecedor<input class="form-control" id="supplier" type="text"></label>
+          <label class="form-label">Documento fiscal<input class="form-control" id="invoice" type="text"></label>
+          <label class="form-label">Emissão<input class="form-control" id="issue-date" type="date"></label>
+          <label class="form-label">Município da nota<input class="form-control" id="municipality" type="text"></label>
+          <label class="form-label">CNAE<input class="form-control" id="cnae" type="text"></label>
+          <label class="form-label detail-span-2">Atividade exercida na nota fiscal<input class="form-control" id="invoice-activity" type="text"></label>
+          <label class="form-label">Crédito fiscal<select class="form-select" id="credit-status"><option value="review">A AVALIAR</option><option value="yes">PASSÍVEL DE CRÉDITO</option><option value="no">NÃO PASSÍVEL</option></select></label>
+          <label class="form-label">Tipo de pagamento<select class="form-select" id="payment-method"><option>COMPRA - BOLETO</option><option>COMPRA - DEPÓSITO</option><option>COMPRA - PIX</option><option>CARTÃO</option><option>CARTÃO PARCELADO</option><option>REEMBOLSO - DEPÓSITO</option><option>REEMBOLSO - PIX</option><option>ADIANTAMENTO DE VIAGEM</option><option>PRESTAÇÃO DE CONTAS</option><option>RESCISÃO - DEPÓSITO</option><option>FÉRIAS - DEPÓSITO</option><option>FOLHA - DEPÓSITO</option><option>FUNDO FIXO - DEPÓSITO</option></select></label>
+          <label class="form-label">Data de pagamento<input class="form-control" id="payment-date" type="date"></label>
+          <label class="form-label">Vencimento<input class="form-control" id="due-date" type="date"></label>
+          <label class="form-label detail-span-2">Categoria<select class="form-select" id="category"></select><span class="field-hint text-small" id="category-hint"></span></label>
+          <label class="form-label detail-span-4">Aprovações identificadas na AP<input class="form-control" id="approvals" type="text"></label>
+          <label class="form-label detail-span-3">Descrição completa<input class="form-control" id="description" type="text"></label>
+          <label class="form-label detail-span-3">Descrição resumida para o nome do arquivo<input class="form-control" id="filename-description" type="text" maxlength="32"><span class="field-hint text-small">Gerada pela IA e usada somente antes do valor no arquivo renomeado.</span></label>
+        </div>
+
+        <section class="subsection" aria-labelledby="values-title">
+          <div class="section-head section-band tone-values"><strong id="values-title">Valores e impostos</strong><label class="form-check form-switch tax-toggle"><input class="form-check-input" id="has-tax" type="checkbox"><span class="form-check-label">Possui retenção de impostos</span></label></div>
+          <div class="tax-compact-grid">
+            <label class="form-label">Valor bruto (R$)<input class="form-control money" id="gross" type="text" inputmode="decimal" placeholder="40.000,00"></label>
+            <label class="form-label">Valor líquido (R$)<input class="form-control money" id="net" type="text" inputmode="decimal" placeholder="40.000,00"></label>
+            <div class="tax-fields" id="tax-fields">
+            <label class="form-label">IR (R$)<input class="form-control money tax-input" id="tax-ir" type="text" inputmode="decimal" placeholder="0,00"></label>
+            <label class="form-label">PIS (R$)<input class="form-control money tax-input" id="tax-pis" type="text" inputmode="decimal" placeholder="0,00"></label>
+            <label class="form-label">COFINS (R$)<input class="form-control money tax-input" id="tax-cofins" type="text" inputmode="decimal" placeholder="0,00"></label>
+            <label class="form-label">CSLL (R$)<input class="form-control money tax-input" id="tax-csll" type="text" inputmode="decimal" placeholder="0,00"></label>
+            <label class="form-label">ISS (R$)<input class="form-control money tax-input" id="tax-iss" type="text" inputmode="decimal" placeholder="0,00"></label>
+            <label class="form-label">INSS (R$)<input class="form-control money tax-input" id="tax-inss" type="text" inputmode="decimal" placeholder="0,00"></label>
+            </div>
+          </div>
+        </section>
+
+        <section class="subsection" aria-labelledby="allocation-title">
+          <div class="section-head section-band tone-allocation"><strong id="allocation-title">Rateio por operação</strong><button class="btn btn-ghost" id="add-allocation" type="button"><i data-lucide="plus" aria-hidden="true"></i> Operação</button></div>
+          <div id="allocation-list"></div>
+          <div class="allocation-total"><span>Total rateado</span><strong id="allocation-total">R$ 0,00</strong></div>
+        </section>
+
+        <div class="validation-box is-review" id="validation-box" aria-live="polite"><strong id="validation-title">Conferência necessária</strong><div class="text-small" id="validation-message">Revise os valores antes de aprovar.</div></div>
+        <label class="form-label" for="review-note">Observação da revisão ou devolução</label><textarea class="form-control" id="review-note" placeholder="Informe objetivamente o que precisa ser confirmado ou corrigido."></textarea>
+        <div class="text-small subtle" id="return-recipient"></div>
+        <div class="actions"><button class="btn btn-primary" id="approve" type="button"><i data-lucide="check" aria-hidden="true"></i> Aprovar informações</button><button class="btn" id="save" type="button">Salvar ajustes</button><button class="btn" id="return" type="button"><i data-lucide="undo-2" aria-hidden="true"></i> Devolver para correção</button><button class="btn btn-ghost" id="cancel" type="button">Cancelar documento</button></div>
+        <div class="subsection"><strong>Arquivos do documento</strong><div class="file-list" id="document-files"></div><div class="text-small subtle" id="download-name"></div><button class="btn" id="download-ap" type="button"><i data-lucide="download" aria-hidden="true"></i> Baixar principal renomeado</button></div>
+        <div class="feedback text-small" id="feedback" aria-live="polite"></div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="view" id="view-invoices">
+    <div class="section-head section-band tone-costs"><div><h2>Notas de entrada</h2><span class="text-small subtle">Notas recebidas com as APs, retenções e análise de crédito fiscal</span></div></div>
+    <div class="viz-controls" aria-label="Filtros das notas de entrada">
+      <label class="form-label">Mês de emissão<input class="form-control" id="invoice-month" type="month"></label>
+      <label class="form-label">Emissão de<input class="form-control" id="invoice-start" type="date" value="2026-07-01"></label>
+      <label class="form-label">Emissão até<input class="form-control" id="invoice-end" type="date" value="2026-07-31"></label>
+      <label class="form-label">Município<select class="form-select" id="invoice-municipality"><option value="all">Todos os municípios</option><option value="outside-salvador">Fora de Salvador</option></select></label>
+      <label class="form-label">Retenções<select class="form-select" id="invoice-retention"><option value="all">Todas</option><option value="with">Com impostos retidos</option><option value="without">Sem impostos retidos</option></select></label>
+      <label class="form-label">Imposto retido<select class="form-select" id="invoice-tax"><option value="all">Todos os impostos</option><option value="ir">IR</option><option value="pis">PIS</option><option value="cofins">COFINS</option><option value="csll">CSLL</option><option value="iss">ISS</option><option value="inss">INSS</option></select></label>
+      <label class="form-label">Crédito fiscal<select class="form-select" id="invoice-credit"><option value="all">Todos</option><option value="review">A avaliar</option><option value="yes">Passível de crédito</option><option value="no">Não passível</option></select></label>
+      <button class="btn btn-primary" id="export-invoices" type="button"><i data-lucide="file-spreadsheet" aria-hidden="true"></i> Exportar Excel</button>
+      <span class="text-small subtle" id="invoice-export-feedback" aria-live="polite"></span>
+    </div>
+    <div class="validation-box" id="invoice-summary" aria-live="polite"></div>
+    <div class="table-responsive"><table class="table table-sm ap-list-table entry-notes-table" aria-label="Notas fiscais de entrada"><thead><tr><th>Emissão</th><th>AP</th><th>Fornecedor / NF</th><th>Município</th><th>CNAE / atividade</th><th class="text-end">Bruto</th><th class="text-end">IR</th><th class="text-end">PIS</th><th class="text-end">COFINS</th><th class="text-end">CSLL</th><th class="text-end">ISS</th><th class="text-end">INSS</th><th class="text-end">Total retido</th><th class="text-end">Líquido</th><th>Crédito fiscal</th></tr></thead><tbody id="invoice-body"></tbody></table></div>
+  </section>
+
+  <section class="view" id="view-approved">
+    <div class="section-head section-band tone-costs"><div><h2>Custos aprovados</h2><span class="text-small subtle">Consulta por data de pagamento e composição do rateio</span></div></div>
+    <div class="viz-controls" aria-label="Filtros de custos">
+      <label class="form-label">De<input class="form-control" id="period-start" type="date" value="2026-07-01"></label>
+      <label class="form-label">Até<input class="form-control" id="period-end" type="date" value="2026-07-31"></label>
+      <label class="form-label">Tipo de documento<select class="form-select" id="approved-type"><option value="all">AP, BM e adiantamento</option><option value="AP">AP</option><option value="BM">BM</option><option value="ADIANTAMENTO DE VIAGEM">Adiantamento</option></select></label>
+      <label class="form-label">Forma de pagamento<select class="form-select" id="approved-method"><option value="all">Todas</option><option>BOLETO</option><option>PIX</option><option>DEPÓSITO</option><option>TRANSFERÊNCIA</option></select></label>
+      <label class="form-label">Documento<select class="form-select" id="approved-item"><option value="all">Todos os aprovados</option></select></label>
+    </div>
+    <div class="viz-grid summary">
+      <section class="card viz-stat"><span class="text-muted">Custo aprovado</span><span class="viz-stat-value" id="approved-total">R$ 0,00</span><span class="text-small subtle" id="approved-count">0 documentos</span></section>
+      <section class="card viz-stat"><span class="text-muted">Impostos retidos</span><span class="viz-stat-value" id="tax-total">R$ 0,00</span><span class="text-small subtle">IR, PIS, COFINS, CSLL, ISS e INSS</span></section>
+      <section class="card viz-stat"><span class="text-muted">Maior operação</span><span class="viz-stat-value" id="largest-operation">—</span><span class="text-small subtle" id="largest-value">R$ 0,00</span></section>
+    </div>
+    <div class="analytics-layout">
+      <section aria-labelledby="allocation-chart-title"><div class="section-band tone-allocation"><h3 id="allocation-chart-title">Rateio por operação</h3></div><div class="chart-wrap" id="allocation-chart" role="img" aria-label="Distribuição do custo aprovado por operação"></div></section>
+      <section class="card" aria-labelledby="date-chart-title"><h3 id="date-chart-title">Custo por data de pagamento</h3><div class="cost-timeline" id="date-chart" role="img" aria-label="Custos aprovados agrupados por data de pagamento"></div><div class="feedback text-small" id="date-summary"></div></section>
+    </div>
+    <div class="table-responsive"><table class="table table-sm" aria-label="Documentos aprovados"><thead><tr><th>Pagamento</th><th>Documento</th><th>Tipo</th><th>Fornecedor</th><th class="text-end">Impostos</th><th class="text-end">Líquido</th></tr></thead><tbody id="approved-body"></tbody></table></div>
+  </section>
+
+  <section class="view" id="view-taxes">
+    <div class="section-head section-band tone-taxes"><div><h2>Consulta de impostos retidos</h2><span class="text-small subtle">Composição por imposto, documento e período de pagamento</span></div></div>
+    <div class="viz-controls" aria-label="Filtros de impostos">
+      <label class="form-label">De<input class="form-control" id="tax-start" type="date" value="2026-07-01"></label>
+      <label class="form-label">Até<input class="form-control" id="tax-end" type="date" value="2026-07-31"></label>
+      <label class="form-label">Tipo de documento<select class="form-select" id="tax-type"><option value="all">AP, BM e adiantamento</option><option value="AP">AP</option><option value="BM">BM</option><option value="ADIANTAMENTO DE VIAGEM">Adiantamento</option></select></label>
+      <label class="form-label">Forma de pagamento<select class="form-select" id="tax-method"><option value="all">Todas</option><option>BOLETO</option><option>PIX</option><option>DEPÓSITO</option><option>TRANSFERÊNCIA</option></select></label>
+    </div>
+    <div class="viz-grid summary">
+      <section class="card viz-stat"><span class="text-muted">Total retido</span><span class="viz-stat-value" id="retained-total">R$ 0,00</span><span class="text-small subtle" id="retained-count">0 documentos</span></section>
+      <section class="card viz-stat"><span class="text-muted">Maior retenção</span><span class="viz-stat-value" id="largest-tax">—</span><span class="text-small subtle" id="largest-tax-value">R$ 0,00</span></section>
+      <section class="card viz-stat"><span class="text-muted">Valor bruto analisado</span><span class="viz-stat-value" id="tax-gross-total">R$ 0,00</span><span class="text-small subtle">Somente documentos do filtro</span></section>
+    </div>
+    <section aria-labelledby="tax-chart-title"><div class="section-band tone-taxes"><h3 id="tax-chart-title">Composição das retenções</h3></div><div class="chart-wrap" id="tax-chart" role="img" aria-label="Distribuição das retenções por imposto"></div></section>
+    <div class="table-responsive"><table class="table table-sm" aria-label="Impostos retidos por documento"><thead><tr><th>Pagamento</th><th>Documento</th><th>Fornecedor</th><th class="text-end">IR</th><th class="text-end">PIS</th><th class="text-end">COFINS</th><th class="text-end">CSLL</th><th class="text-end">ISS</th><th class="text-end">INSS</th><th class="text-end">Total</th></tr></thead><tbody id="tax-body"></tbody></table></div>
+  </section>
+
+  <script>
+    (() => {
+      const root=document.getElementById('gp-payables');
+      const brl=new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'});
+      const decimal=new Intl.NumberFormat('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+      const parseMoney=value=>{ const clean=String(value??'').replace(/\s/g,'').replace(/R\$/gi,'').replace(/\./g,'').replace(',','.').replace(/[^0-9.-]/g,''); return Number(clean)||0; };
+      const formatMoney=value=>decimal.format(Number(value)||0);
+      const taxTotal=taxes=>Object.values(taxes||{}).reduce((sum,value)=>sum+(Number(value)||0),0);
+      const categories=[
+        ['Serviços Técnicos Terceirizados','Serviço ligado à área ou operação correspondente.'],
+        ['Mão de Obra Direta (HH Produtivo) - PJ','Mão de obra produtiva vinculada à execução.'],
+        ['Materiais Aplicados e Ferramentas','Materiais e ferramentas aplicados na execução.'],
+        ['Viagens (Passagem e Hospedagem)','Contrato, comercial ou institucional conforme o contexto.'],
+        ['QSSMA / ASO / Treinamentos','Exames e exigências de qualidade, saúde e segurança.'],
+        ['Sistemas de Informação','Alocação na área usuária do sistema.'],
+        ['Utilidades (Energia, Água, etc)','Infraestrutura física do escritório.']
+      ];
+      const docs=[
+        {id:'AP-2026-0187',type:'AP',supplier:'Construtora Horizonte',category:0,invoice:'NF 9821',issue:'2026-07-18',municipality:'CAMAÇARI/BA',cnae:'7112-0/00',activity:'SERVIÇOS DE ENGENHARIA',credit:'review',method:'COMPRA - BOLETO',pay:'2026-07-24',due:'2026-07-24',approvals:'SOLICITANTE / DIRETOR / FINANCEIRO',desc:'MEDIÇÃO DE SERVIÇOS - OPERAÇÕES PTB20 E TWS01',shortDesc:'SERVIÇOS PTB20 E TWS01',gross:42850,taxes:{ir:642.75,pis:278.53,cofins:1285.50,csll:428.50,iss:214.72,inss:0},net:40000,status:'Revisar',author:{name:'João Pereira',email:'joao.pereira@empresa.com'},alloc:[['PTB20',24000],['TWS01',16000]]},
+        {id:'AP-2026-0188',type:'AP',supplier:'F C Lanches',category:2,invoice:'NF 1443',issue:'2026-07-20',municipality:'SÃO PAULO/SP',cnae:'5620-1/01',activity:'FORNECIMENTO DE ALIMENTOS PREPARADOS',credit:'no',method:'COMPRA - PIX',pay:'2026-07-30',due:'2026-07-30',approvals:'SOLICITANTE / DIRETOR / FINANCEIRO',desc:'NF 1443 - LANCHES PARA EQUIPE DA OPERAÇÃO PTB16 SP',shortDesc:'LANCHES PTB16 SP',gross:360,taxes:{ir:0,pis:0,cofins:0,csll:0,iss:0,inss:0},net:360,status:'Revisar',author:{name:'Ana Costa',email:'ana.costa@empresa.com'},alloc:[['PTB16 SP',360]]},
+        {id:'AP-2026-0189',type:'AP',supplier:'AGCER Energia',category:6,invoice:'FAT 06/2026',issue:'2026-07-01',municipality:'SALVADOR/BA',cnae:'3514-0/00',activity:'DISTRIBUIÇÃO DE ENERGIA ELÉTRICA',credit:'review',method:'COMPRA - BOLETO',pay:'2026-07-23',due:'2026-07-23',approvals:'SOLICITANTE / FINANCEIRO - VALIDAR DIRETOR',desc:'ENERGIA ELÉTRICA COMPETÊNCIA 06/2026 - ELDORADO',shortDesc:'ENERGIA 06-2026 ELDORADO',gross:12381.23,taxes:{ir:0,pis:0,cofins:0,csll:0,iss:0,inss:0},net:12381.23,status:'Revisar',author:{name:'Mariana Souza',email:'mariana.souza@empresa.com'},alloc:[['ELDORADO',12381.23]]}
+      ];
+      const approved=[
+        {id:'AP-2026-0181',type:'AP',supplier:'Almeida Serviços',invoice:'NF 458',issue:'2026-07-08',municipality:'SALVADOR/BA',cnae:'8299-7/99',activity:'SERVIÇOS ADMINISTRATIVOS',credit:'yes',method:'BOLETO',pay:'2026-07-10',gross:19500,taxes:{ir:292.50,pis:126.75,cofins:585,csll:195,iss:0,inss:0},net:18300,alloc:[['PTB20',10980],['TWS01',7320]]},
+        {id:'BM-2026-041',type:'BM',supplier:'WSteel Struction',method:'DEPÓSITO',pay:'2026-07-15',gross:14200,taxes:{ir:213,pis:92.30,cofins:426,csll:142,iss:0,inss:0},net:13326.70,alloc:[['PTB16 SP',7996.02],['TNG03',5330.68]]},
+        {id:'AP-2026-0183',type:'AP',supplier:'Via Norte Transportes',invoice:'CTE 887',issue:'2026-07-17',municipality:'CAMAÇARI/BA',cnae:'4930-2/02',activity:'TRANSPORTE RODOVIÁRIO DE CARGA',credit:'review',method:'PIX',pay:'2026-07-18',gross:9740,taxes:{ir:0,pis:0,cofins:0,csll:0,iss:0,inss:0},net:9740,alloc:[['TWS01',9740]]},
+        {id:'ADV-2026-027',type:'ADIANTAMENTO DE VIAGEM',supplier:'Carlos Mendes',method:'PIX',pay:'2026-07-21',gross:3200,taxes:{ir:0,pis:0,cofins:0,csll:0,iss:0,inss:0},net:3200,alloc:[['PTB20',3200]]},
+        {id:'AP-2026-0186',type:'AP',supplier:'Suprimentos Central',invoice:'NF 4401',issue:'2026-07-28',municipality:'FEIRA DE SANTANA/BA',cnae:'4663-0/00',activity:'COMÉRCIO DE MÁQUINAS E EQUIPAMENTOS',credit:'yes',method:'TRANSFERÊNCIA',pay:'2026-07-30',gross:25960,taxes:{ir:0,pis:0,cofins:0,csll:0,iss:0,inss:0},net:25960,alloc:[['TNG03',15576],['PTB20',10384]]}
+      ];
+      let selected=-1;
+      const $=s=>root.querySelector(s);
+      const escapeHtml=value=>String(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+      const statusClass=s=>s==='Validada'?'status-valid':s==='Cancelada'?'status-cancel':s==='Processando'||s==='Devolvida'?'status-process':'status-review';
+      const catOptions=()=>categories.map((c,i)=>`<option value="${i}">${c[0]}</option>`).join('');
+      $('#category').innerHTML=catOptions();
+      const formatDate=value=>value&&value!=='NA'?value.split('-').reverse().join('/'):'NA';
+      const renderQueue=()=>{
+        $('#queue-body').innerHTML=docs.map((d,i)=>`<tr data-index="${i}" aria-selected="${i===selected}"><td><button class="btn btn-ghost doc-button" type="button">${escapeHtml(d.supplier)}</button><div class="doc-meta text-small">${escapeHtml(d.id)} · <span class="status-line ${statusClass(d.status)}"><span class="status-dot"></span>${d.status}</span>${d.files?.length?` · ${d.files.length} arquivo${d.files.length===1?'':'s'}`:''}</div></td><td class="text-nowrap">${escapeHtml(d.invoice||'NA')}</td><td class="text-nowrap">${formatDate(d.issue)}</td><td>${escapeHtml(d.municipality||'NA')}</td><td>${escapeHtml(d.method)}</td><td class="text-nowrap">${formatDate(d.pay)}</td><td class="text-end text-nowrap">${brl.format(d.gross)}</td><td class="text-end text-nowrap">${brl.format(d.net)}</td></tr>`).join('');
+        $('#queue-count').textContent=docs.filter(d=>d.status!=='Cancelada').length;
+      };
+      const renderAllocations=()=>{
+        const d=docs[selected];
+        $('#allocation-list').innerHTML=d.alloc.map((a,i)=>`<div class="allocation-row" data-allocation="${i}"><label class="form-label">Operação<input class="form-control op-input" type="text" value="${a[0]}"></label><label class="form-label">Valor (R$)<input class="form-control amount-input" type="text" inputmode="decimal" value="${formatMoney(a[1])}"></label><button class="btn btn-ghost remove-allocation" type="button" aria-label="Remover operação"><i data-lucide="trash-2" aria-hidden="true"></i></button></div>`).join('');
+        updateAllocationTotal();
+        if(window.lucide) lucide.createIcons({attrs:{width:16,height:16}});
+      };
+      const summarizeDescription=(value,type)=>{
+        const clean=String(value||type||'DOCUMENTO').toUpperCase().replace(/[^A-ZÀ-Ú0-9 ]/g,' ').replace(/\s+/g,' ').trim();
+        return clean.replace(/^BM\s+[A-Z]{3}\s*\d{2,4}\s*/i,'').replace(/MEDIÇÃO DE SERVIÇOS?/gi,'SERVIÇOS').replace(/ADIANTAMENTO DE VIAGEM/gi,'VIAGEM').replace(/OPERAÇÕES?|OPERAÇÃO/gi,'').replace(/\s+/g,' ').trim().split(' ').slice(0,5).join(' ').slice(0,32)||type;
+      };
+      const fileName=d=>{
+        const date=(d.due||d.pay||'').replaceAll('-','.');
+        const supplier=d.supplier.toUpperCase().replace(/[^A-ZÀ-Ú0-9 ]/g,'').replace(/\s+/g,' ').trim().slice(0,34);
+        const invoice=(d.invoice&&d.invoice!=='NA'?` - ${d.invoice.toUpperCase()}`:'');
+        const description=(d.shortDesc||summarizeDescription(d.desc,d.type)).toUpperCase().replace(/[^A-ZÀ-Ú0-9 ]/g,'').replace(/\s+/g,' ').trim().slice(0,32);
+        return `VENC. ${date} ${supplier}${invoice} - ${description} - R$ ${formatMoney(d.net)}.PDF`;
+      };
+      const renderFiles=d=>{
+        $('#document-files').innerHTML=d.files?.length?d.files.map((file,index)=>`<a class="btn btn-ghost" href="${file.url}" download="${escapeHtml(file.name)}"><i data-lucide="${index===0?'file-text':'paperclip'}" aria-hidden="true"></i>${index===0?'Principal':'Anexo'}: ${escapeHtml(file.name)}</a>`).join(''):'<span class="text-small subtle">Documento demonstrativo, sem arquivo original anexado.</span>';
+        if(window.lucide)lucide.createIcons({attrs:{width:16,height:16}});
+      };
+      const closeDetail=()=>{$('#detail-panel').classList.remove('is-open');document.body.classList.remove('modal-open');selected=-1;renderQueue();};
+      const makePdf=lines=>{
+        const nl=String.fromCharCode(10);
+        const clean=value=>String(value).normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^\x20-\x7E]/g,' ').replace(/[()\\]/g,' ');
+        const commands=clean(lines).split(nl).map((line,index)=>`${index?'0 -18 Td ':''}(${line}) Tj`).join(nl);
+        const stream=['BT','/F1 11 Tf','50 790 Td',commands,'ET'].join(nl);
+        const objects=[
+          '<< /Type /Catalog /Pages 2 0 R >>',
+          '<< /Type /Pages /Kids [3 0 R] /Count 1 >>',
+          '<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 5 0 R >> >> /Contents 4 0 R >>',
+          [`<< /Length ${stream.length} >>`,'stream',stream,'endstream'].join(nl),
+          '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>'
+        ];
+        let pdf='%PDF-1.4'+nl,offsets=[0]; const bytes=value=>new TextEncoder().encode(value).length;
+        objects.forEach((object,index)=>{offsets.push(bytes(pdf));pdf+=[`${index+1} 0 obj`,object,'endobj',''].join(nl);});
+        const xref=bytes(pdf); pdf+=['xref',`0 ${objects.length+1}`,'0000000000 65535 f ',''].join(nl)+offsets.slice(1).map(offset=>String(offset).padStart(10,'0')+' 00000 n '+nl).join('');
+        pdf+=['trailer',`<< /Size ${objects.length+1} /Root 1 0 R >>`,'startxref',String(xref),'%%EOF'].join(nl);
+        return new Blob([pdf],{type:'application/pdf'});
+      };
+      const loadDoc=i=>{
+        selected=i; const d=docs[i]; renderQueue(); $('#detail-panel').classList.add('is-open'); document.body.classList.add('modal-open'); setTimeout(()=>$('#close-detail').focus(),0);
+        $('#detail-type').textContent='AP selecionada'; $('#detail-title').textContent=d.id;
+        $('#detail-status').className=`status-line ${statusClass(d.status)}`; $('#detail-status').innerHTML=`<span class="status-dot"></span>${d.status}`;
+        $('#supplier').value=d.supplier; $('#category').value=String(d.category); $('#category-hint').textContent=categories[d.category][1];
+        $('#invoice').value=d.invoice; $('#issue-date').value=d.issue&&d.issue!=='NA'?d.issue:''; $('#municipality').value=d.municipality||'NA'; $('#cnae').value=d.cnae||'NA'; $('#invoice-activity').value=d.activity||'NA'; $('#credit-status').value=d.credit||'review'; $('#payment-method').value=d.method; $('#payment-date').value=d.pay; $('#due-date').value=d.due; $('#approvals').value=d.approvals||'NA'; $('#description').value=d.desc; $('#filename-description').value=d.shortDesc||summarizeDescription(d.desc,d.type);
+        $('#gross').value=formatMoney(d.gross); $('#net').value=formatMoney(d.net);
+        Object.entries(d.taxes).forEach(([key,value])=>{ const field=$(`#tax-${key}`); if(field)field.value=formatMoney(value); });
+        $('#has-tax').checked=taxTotal(d.taxes)>0; $('#tax-fields').classList.toggle('is-hidden',!$('#has-tax').checked);
+        $('#return-recipient').textContent=`Se devolvida, a solicitação será enviada para ${d.author.name} (${d.author.email}).`;
+        $('#download-name').textContent=fileName(d);
+        $('#review-note').value=''; $('#feedback').textContent=''; renderAllocations(); renderFiles(d); validate();
+      };
+      const capture=()=>{
+        const d=docs[selected];
+        d.supplier=$('#supplier').value.trim(); d.category=Number($('#category').value); d.invoice=$('#invoice').value.trim(); d.issue=$('#issue-date').value||'NA'; d.municipality=$('#municipality').value.trim()||'NA'; d.cnae=$('#cnae').value.trim()||'NA'; d.activity=$('#invoice-activity').value.trim()||'NA'; d.credit=$('#credit-status').value; d.method=$('#payment-method').value; d.pay=$('#payment-date').value; d.due=$('#due-date').value; d.approvals=$('#approvals').value.trim()||'NA'; d.desc=$('#description').value.trim(); d.shortDesc=$('#filename-description').value.trim()||summarizeDescription(d.desc,d.type);
+        d.gross=parseMoney($('#gross').value); d.net=parseMoney($('#net').value);
+        d.taxes={ir:0,pis:0,cofins:0,csll:0,iss:0,inss:0}; Object.keys(d.taxes).forEach(key=>d.taxes[key]=$('#has-tax').checked?parseMoney($(`#tax-${key}`).value):0);
+        d.alloc=[...root.querySelectorAll('.allocation-row')].map(r=>[r.querySelector('.op-input').value.trim()||'SEM OPERAÇÃO',parseMoney(r.querySelector('.amount-input').value)]);
+        $('#download-name').textContent=fileName(d);
+      };
+      function updateAllocationTotal(){ const total=[...root.querySelectorAll('.amount-input')].reduce((s,e)=>s+parseMoney(e.value),0); $('#allocation-total').textContent=brl.format(total); return total; }
+      const validate=()=>{
+        const gross=parseMoney($('#gross').value), taxes=$('#has-tax').checked?[...root.querySelectorAll('.tax-input')].reduce((sum,e)=>sum+parseMoney(e.value),0):0, net=parseMoney($('#net').value), alloc=updateAllocationTotal();
+        const expected=gross-taxes, valueOk=Math.abs(expected-net)<0.01, allocOk=Math.abs(alloc-net)<0.01, documentOk=$('#invoice').value.trim()&&$('#invoice').value.trim().toUpperCase()!=='NA', approvalOk=!/(VALIDAR|EM IDENTIFICAÇÃO|^NA$)/i.test($('#approvals').value.trim());
+        const allOk=valueOk&&allocOk&&documentOk&&approvalOk, box=$('#validation-box'); box.className='validation-box'+(allOk?'':' is-review');
+        $('#validation-title').textContent=allOk?'AP conferida':'Conferência necessária';
+        const messages=[]; if(!documentOk)messages.push('Validar documento fiscal ou documento que sustenta o pagamento.'); if(!approvalOk)messages.push('Validar as aprovações identificadas na AP.'); if(!valueOk)messages.push(`Líquido esperado: ${brl.format(expected)} após ${brl.format(taxes)} de impostos.`); if(!allocOk)messages.push(`Rateio difere do líquido em ${brl.format(Math.abs(alloc-net))}.`); if(allOk)messages.push('Documento, aprovações, valores, impostos e rateio estão coerentes para conferência final.');
+        $('#validation-message').textContent=messages.join(' '); return allOk;
+      };
+      const renderApprovedOptions=()=>{ const current=$('#approved-item').value||'all'; $('#approved-item').innerHTML='<option value="all">Todos os aprovados</option>'+approved.map((d,i)=>`<option value="${i}">${d.id} · ${d.supplier}</option>`).join(''); $('#approved-item').value=[...$('#approved-item').options].some(o=>o.value===current)?current:'all'; };
+      const filteredApproved=()=>{ const start=$('#period-start').value, end=$('#period-end').value, item=$('#approved-item').value, type=$('#approved-type').value, method=$('#approved-method').value; return approved.filter((d,i)=>(!start||d.pay>=start)&&(!end||d.pay<=end)&&(item==='all'||Number(item)===i)&&(type==='all'||d.type===type)&&(method==='all'||d.method===method)); };
+      const renderAnalytics=()=>{
+        const items=filteredApproved(), total=items.reduce((s,d)=>s+d.net,0), taxes=items.reduce((s,d)=>s+taxTotal(d.taxes),0), ops={};
+        items.forEach(d=>d.alloc.forEach(([op,v])=>ops[op]=(ops[op]||0)+v)); const sorted=Object.entries(ops).sort((a,b)=>b[1]-a[1]);
+        $('#approved-total').textContent=brl.format(total); $('#approved-count').textContent=`${items.length} documento${items.length===1?'':'s'}`; $('#tax-total').textContent=brl.format(taxes); $('#largest-operation').textContent=sorted[0]?.[0]||'—'; $('#largest-value').textContent=brl.format(sorted[0]?.[1]||0);
+        const max=sorted[0]?.[1]||1; $('#allocation-chart').innerHTML=sorted.length?sorted.map(([op,v])=>`<div class="bar-row"><span>${op}</span><div class="bar-track" aria-hidden="true"><div class="bar-fill" style="width:${(v/max*100).toFixed(1)}%"></div></div><strong class="bar-value">${brl.format(v)}</strong></div>`).join(''):'<div class="empty">Nenhum custo no período selecionado.</div>';
+        const dates={}; items.forEach(d=>dates[d.pay]=(dates[d.pay]||0)+d.net); const dateEntries=Object.entries(dates).sort(); const dateMax=Math.max(...dateEntries.map(x=>x[1]),1);
+        $('#date-chart').innerHTML=dateEntries.length?dateEntries.map(([date,v])=>`<div class="date-column" data-tooltip="${brl.format(v)}"><div class="date-bar" style="height:${Math.max(3,v/dateMax*105).toFixed(0)}px"></div><span class="date-label text-small">${date.slice(8,10)}/${date.slice(5,7)}</span></div>`).join(''):'<div class="empty">Sem pagamentos</div>';
+        $('#date-summary').textContent=dateEntries.length?`${dateEntries.length} data${dateEntries.length===1?'':'s'} de pagamento no recorte atual.`:'';
+        $('#approved-body').innerHTML=items.map(d=>`<tr><td>${d.pay.split('-').reverse().join('/')}</td><td>${d.id}</td><td>${d.type}</td><td>${d.supplier}</td><td class="text-end">${brl.format(taxTotal(d.taxes))}</td><td class="text-end">${brl.format(d.net)}</td></tr>`).join('')||'<tr><td colspan="6" class="empty">Nenhum documento aprovado nesse período.</td></tr>';
+      };
+      const allEntryNotes=()=>[...docs,...approved].filter(d=>d.type==='AP'&&d.invoice&&d.invoice!=='NA');
+      const populateInvoiceMunicipalities=()=>{
+        const select=$('#invoice-municipality'), current=select.value||'all', municipalities=[...new Set(allEntryNotes().map(d=>d.municipality||'NA'))].sort();
+        select.innerHTML='<option value="all">Todos os municípios</option><option value="outside-salvador">Fora de Salvador</option>'+municipalities.map(city=>`<option value="${escapeHtml(city)}">${escapeHtml(city)}</option>`).join('');
+        select.value=[...select.options].some(option=>option.value===current)?current:'all';
+      };
+      const filteredEntryNotes=()=>{
+        const month=$('#invoice-month').value,start=$('#invoice-start').value,end=$('#invoice-end').value,municipality=$('#invoice-municipality').value,retention=$('#invoice-retention').value,tax=$('#invoice-tax').value,credit=$('#invoice-credit').value;
+        return allEntryNotes().filter(d=>(!month||d.issue.startsWith(month))&&(!start||d.issue>=start)&&(!end||d.issue<=end)&&(municipality==='all'||(municipality==='outside-salvador'?!/SALVADOR/i.test(d.municipality||''):d.municipality===municipality))&&(retention==='all'||(retention==='with'?taxTotal(d.taxes)>0:taxTotal(d.taxes)===0))&&(tax==='all'||(Number(d.taxes?.[tax])||0)>0)&&(credit==='all'||(d.credit||'review')===credit));
+      };
+      const renderEntryInvoices=()=>{
+        populateInvoiceMunicipalities();
+        const items=filteredEntryNotes(), totalRetained=items.reduce((sum,d)=>sum+taxTotal(d.taxes),0), outside=items.filter(d=>!/SALVADOR/i.test(d.municipality||'')), outsideRetained=outside.reduce((sum,d)=>sum+taxTotal(d.taxes),0);
+        $('#invoice-summary').innerHTML=`<strong>${items.length} nota${items.length===1?'':'s'} no filtro</strong><div class="text-small">Total retido: ${brl.format(totalRetained)} · Fora de Salvador: ${outside.length} nota${outside.length===1?'':'s'} e ${brl.format(outsideRetained)} retidos.</div>`;
+        const creditLabel={review:'A AVALIAR',yes:'PASSÍVEL',no:'NÃO PASSÍVEL'};
+        $('#invoice-body').innerHTML=items.map(d=>`<tr class="${d.credit==='yes'?'credit-eligible':''}"><td class="text-nowrap">${formatDate(d.issue)}</td><td class="text-nowrap">${escapeHtml(d.id)}</td><td><strong>${escapeHtml(d.supplier)}</strong><div class="text-small subtle">${escapeHtml(d.invoice)}</div></td><td class="text-nowrap">${escapeHtml(d.municipality||'NA')}</td><td><strong>${escapeHtml(d.cnae||'NA')}</strong><div class="text-small subtle">${escapeHtml(d.activity||'NA')}</div></td><td class="text-end text-nowrap">${brl.format(d.gross)}</td>${['ir','pis','cofins','csll','iss','inss'].map(key=>`<td class="text-end text-nowrap">${brl.format(d.taxes?.[key]||0)}</td>`).join('')}<td class="text-end text-nowrap"><strong>${brl.format(taxTotal(d.taxes))}</strong></td><td class="text-end text-nowrap">${brl.format(d.net)}</td><td><select class="form-select credit-decision" data-document-id="${escapeHtml(d.id)}" aria-label="Crédito fiscal de ${escapeHtml(d.invoice)}">${Object.entries(creditLabel).map(([value,label])=>`<option value="${value}" ${value===(d.credit||'review')?'selected':''}>${label}</option>`).join('')}</select></td></tr>`).join('')||'<tr><td colspan="15" class="empty">Nenhuma nota encontrada para os filtros selecionados.</td></tr>';
+      };
+      const xlsxColumn=index=>{let name='';for(let n=index;n>0;n=Math.floor((n-1)/26))name=String.fromCharCode(65+(n-1)%26)+name;return name;};
+      const xlsxCell=(value,row,column,style=0)=>{
+        const reference=`${xlsxColumn(column)}${row}`,styleAttr=style?` s="${style}"`:'';
+        return typeof value==='number'?`<c r="${reference}" s="2"><v>${Number(value)||0}</v></c>`:`<c r="${reference}" t="inlineStr"${styleAttr}><is><t>${escapeHtml(value??'')}</t></is></c>`;
+      };
+      const crcTable=Array.from({length:256},(_,number)=>{let value=number;for(let bit=0;bit<8;bit++)value=(value&1)?0xedb88320^(value>>>1):value>>>1;return value>>>0;});
+      const crc32=bytes=>{let crc=0xffffffff;for(const byte of bytes)crc=crcTable[(crc^byte)&255]^(crc>>>8);return (crc^0xffffffff)>>>0;};
+      const xlsxArchive=files=>{
+        const encoder=new TextEncoder(),localParts=[],centralParts=[],now=new Date(),year=Math.max(1980,now.getFullYear()),dosTime=(now.getHours()<<11)|(now.getMinutes()<<5)|Math.floor(now.getSeconds()/2),dosDate=((year-1980)<<9)|((now.getMonth()+1)<<5)|now.getDate();
+        let offset=0;
+        Object.entries(files).forEach(([name,content])=>{
+          const nameBytes=encoder.encode(name),data=encoder.encode(content),crc=crc32(data),local=new Uint8Array(30+nameBytes.length+data.length),localView=new DataView(local.buffer);
+          localView.setUint32(0,0x04034b50,true);localView.setUint16(4,20,true);localView.setUint16(6,0x0800,true);localView.setUint16(8,0,true);localView.setUint16(10,dosTime,true);localView.setUint16(12,dosDate,true);localView.setUint32(14,crc,true);localView.setUint32(18,data.length,true);localView.setUint32(22,data.length,true);localView.setUint16(26,nameBytes.length,true);localView.setUint16(28,0,true);local.set(nameBytes,30);local.set(data,30+nameBytes.length);localParts.push(local);
+          const central=new Uint8Array(46+nameBytes.length),centralView=new DataView(central.buffer);
+          centralView.setUint32(0,0x02014b50,true);centralView.setUint16(4,20,true);centralView.setUint16(6,20,true);centralView.setUint16(8,0x0800,true);centralView.setUint16(10,0,true);centralView.setUint16(12,dosTime,true);centralView.setUint16(14,dosDate,true);centralView.setUint32(16,crc,true);centralView.setUint32(20,data.length,true);centralView.setUint32(24,data.length,true);centralView.setUint16(28,nameBytes.length,true);centralView.setUint16(30,0,true);centralView.setUint16(32,0,true);centralView.setUint16(34,0,true);centralView.setUint16(36,0,true);centralView.setUint32(38,0,true);centralView.setUint32(42,offset,true);central.set(nameBytes,46);centralParts.push(central);offset+=local.length;
+        });
+        const centralOffset=offset,centralSize=centralParts.reduce((sum,part)=>sum+part.length,0),end=new Uint8Array(22),endView=new DataView(end.buffer);
+        endView.setUint32(0,0x06054b50,true);endView.setUint16(4,0,true);endView.setUint16(6,0,true);endView.setUint16(8,centralParts.length,true);endView.setUint16(10,centralParts.length,true);endView.setUint32(12,centralSize,true);endView.setUint32(16,centralOffset,true);endView.setUint16(20,0,true);
+        return new Blob([...localParts,...centralParts,end],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+      };
+      const buildInvoiceWorkbook=items=>{
+        const selectedText=id=>$(id).selectedOptions?.[0]?.textContent||'Todos',filters=[
+          ['Mês de emissão',$('#invoice-month').value||'Todos'],
+          ['Período de emissão',`${formatDate($('#invoice-start').value)||'Início'} a ${formatDate($('#invoice-end').value)||'Fim'}`],
+          ['Município',selectedText('#invoice-municipality')],
+          ['Retenções',selectedText('#invoice-retention')],
+          ['Imposto retido',selectedText('#invoice-tax')],
+          ['Crédito fiscal',selectedText('#invoice-credit')]
+        ],headers=['Emissão','AP','Fornecedor','Documento fiscal','Município','CNAE','Atividade','Tipo de pagamento','Data de pagamento','Valor bruto','IR','PIS','COFINS','CSLL','ISS','INSS','Total retido','Valor líquido','Crédito fiscal'],creditLabels={review:'A avaliar',yes:'Passível de crédito',no:'Não passível'},headerRow=9;
+        let rows=`<row r="1">${xlsxCell('Relatório de notas de entrada',1,1,3)}</row>`;
+        filters.forEach((filter,index)=>{const row=index+2;rows+=`<row r="${row}">${xlsxCell(filter[0],row,1,1)}${xlsxCell(filter[1],row,2)}</row>`;});
+        rows+=`<row r="${headerRow}">${headers.map((header,index)=>xlsxCell(header,headerRow,index+1,1)).join('')}</row>`;
+        items.forEach((d,index)=>{const row=headerRow+index+1,values=[formatDate(d.issue),d.id,d.supplier,d.invoice,d.municipality||'NA',d.cnae||'NA',d.activity||'NA',d.method||'NA',formatDate(d.pay),Number(d.gross)||0,Number(d.taxes?.ir)||0,Number(d.taxes?.pis)||0,Number(d.taxes?.cofins)||0,Number(d.taxes?.csll)||0,Number(d.taxes?.iss)||0,Number(d.taxes?.inss)||0,taxTotal(d.taxes),Number(d.net)||0,creditLabels[d.credit||'review']];rows+=`<row r="${row}">${values.map((value,column)=>xlsxCell(value,row,column+1)).join('')}</row>`;});
+        const lastRow=headerRow+items.length,columnWidths=[12,16,28,17,22,16,34,23,16,16,13,13,13,13,13,13,16,16,22],columns=columnWidths.map((width,index)=>`<col min="${index+1}" max="${index+1}" width="${width}" customWidth="1"/>`).join('');
+        const worksheet=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetViews><sheetView workbookViewId="0"><pane ySplit="9" topLeftCell="A10" activePane="bottomLeft" state="frozen"/></sheetView></sheetViews><cols>${columns}</cols><sheetData>${rows}</sheetData><mergeCells count="1"><mergeCell ref="A1:S1"/></mergeCells><autoFilter ref="A${headerRow}:S${lastRow}"/></worksheet>`;
+        const styles=`<?xml version="1.0" encoding="UTF-8" standalone="yes"?><styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><numFmts count="1"><numFmt numFmtId="164" formatCode="[$R$-416] #,##0.00"/></numFmts><fonts count="2"><font><sz val="11"/><name val="Calibri"/></font><font><b/><sz val="11"/><name val="Calibri"/></font></fonts><fills count="3"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill><fill><patternFill patternType="solid"><fgColor rgb="FFD9EAF7"/><bgColor indexed="64"/></patternFill></fill></fills><borders count="1"><border><left/><right/><top/><bottom/><diagonal/></border></borders><cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs><cellXfs count="4"><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/><xf numFmtId="0" fontId="1" fillId="2" borderId="0" xfId="0" applyFont="1" applyFill="1"/><xf numFmtId="164" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/><xf numFmtId="0" fontId="1" fillId="0" borderId="0" xfId="0" applyFont="1"/></cellXfs><cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles></styleSheet>`;
+        return xlsxArchive({
+          '[Content_Types].xml':'<?xml version="1.0" encoding="UTF-8"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/></Types>',
           '_rels/.rels':'<?xml version="1.0" encoding="UTF-8"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>',
           'xl/workbook.xml':'<?xml version="1.0" encoding="UTF-8"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets><sheet name="Notas de entrada" sheetId="1" r:id="rId1"/></sheets></workbook>',
           'xl/_rels/workbook.xml.rels':'<?xml version="1.0" encoding="UTF-8"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>',
