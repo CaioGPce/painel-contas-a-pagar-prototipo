@@ -1103,6 +1103,27 @@ html&gt;body{padding:6px}&lt;/style&gt;
       border-radius:9px;
       background:rgb(248 250 253);
     }
+    #gp-payables .tax-filter-options {
+      min-width:min(100%,430px);
+      flex:2 1 430px;
+      margin:0;
+      padding:0;
+      border:0;
+    }
+    #gp-payables .tax-filter-options legend { margin-bottom:4px; padding:0; }
+    #gp-payables .tax-check-grid { display:flex; flex-wrap:wrap; gap:5px; }
+    #gp-payables .tax-check-grid .form-check {
+      min-height:28px;
+      padding:3px 8px;
+      border:1px solid var(--border);
+      border-radius:7px;
+      background:var(--card);
+    }
+    #gp-payables .tax-check-grid .form-check:has(.form-check-input:checked) {
+      border-color:rgb(142 180 211);
+      color:var(--primary);
+      background:var(--accent);
+    }
     #gp-payables #view-invoices .validation-box {
       border-color:rgb(174 220 189);
       background:rgb(242 251 245);
@@ -1254,7 +1275,7 @@ html&gt;body{padding:6px}&lt;/style&gt;
       &lt;label class=&quot;form-label&quot;&gt;Emiss&#227;o at&#233;&lt;input class=&quot;form-control&quot; id=&quot;invoice-end&quot; type=&quot;date&quot; value=&quot;2026-07-31&quot;&gt;&lt;/label&gt;
       &lt;label class=&quot;form-label&quot;&gt;Munic&#237;pio&lt;select class=&quot;form-select&quot; id=&quot;invoice-municipality&quot;&gt;&lt;option value=&quot;all&quot;&gt;Todos os munic&#237;pios&lt;/option&gt;&lt;option value=&quot;outside-salvador&quot;&gt;Fora de Salvador&lt;/option&gt;&lt;/select&gt;&lt;/label&gt;
       &lt;label class=&quot;form-label&quot;&gt;Reten&#231;&#245;es&lt;select class=&quot;form-select&quot; id=&quot;invoice-retention&quot;&gt;&lt;option value=&quot;all&quot;&gt;Todas&lt;/option&gt;&lt;option value=&quot;with&quot;&gt;Com impostos retidos&lt;/option&gt;&lt;option value=&quot;without&quot;&gt;Sem impostos retidos&lt;/option&gt;&lt;/select&gt;&lt;/label&gt;
-      &lt;label class=&quot;form-label&quot;&gt;Imposto retido&lt;select class=&quot;form-select&quot; id=&quot;invoice-tax&quot;&gt;&lt;option value=&quot;all&quot;&gt;Todos os impostos&lt;/option&gt;&lt;option value=&quot;ir&quot;&gt;IR&lt;/option&gt;&lt;option value=&quot;pis&quot;&gt;PIS&lt;/option&gt;&lt;option value=&quot;cofins&quot;&gt;COFINS&lt;/option&gt;&lt;option value=&quot;csll&quot;&gt;CSLL&lt;/option&gt;&lt;option value=&quot;iss&quot;&gt;ISS&lt;/option&gt;&lt;option value=&quot;inss&quot;&gt;INSS&lt;/option&gt;&lt;/select&gt;&lt;/label&gt;
+      &lt;fieldset class=&quot;tax-filter-options&quot;&gt;&lt;legend class=&quot;form-label&quot;&gt;Imposto retido &lt;span class=&quot;text-small subtle&quot;&gt;(sem sele&#231;&#227;o = todos)&lt;/span&gt;&lt;/legend&gt;&lt;div class=&quot;tax-check-grid&quot;&gt;&lt;label class=&quot;form-check&quot;&gt;&lt;input class=&quot;form-check-input invoice-tax-check&quot; type=&quot;checkbox&quot; value=&quot;ir&quot;&gt;&lt;span class=&quot;form-check-label&quot;&gt;IR&lt;/span&gt;&lt;/label&gt;&lt;label class=&quot;form-check&quot;&gt;&lt;input class=&quot;form-check-input invoice-tax-check&quot; type=&quot;checkbox&quot; value=&quot;pis&quot;&gt;&lt;span class=&quot;form-check-label&quot;&gt;PIS&lt;/span&gt;&lt;/label&gt;&lt;label class=&quot;form-check&quot;&gt;&lt;input class=&quot;form-check-input invoice-tax-check&quot; type=&quot;checkbox&quot; value=&quot;cofins&quot;&gt;&lt;span class=&quot;form-check-label&quot;&gt;COFINS&lt;/span&gt;&lt;/label&gt;&lt;label class=&quot;form-check&quot;&gt;&lt;input class=&quot;form-check-input invoice-tax-check&quot; type=&quot;checkbox&quot; value=&quot;csll&quot;&gt;&lt;span class=&quot;form-check-label&quot;&gt;CSLL&lt;/span&gt;&lt;/label&gt;&lt;label class=&quot;form-check&quot;&gt;&lt;input class=&quot;form-check-input invoice-tax-check&quot; type=&quot;checkbox&quot; value=&quot;iss&quot;&gt;&lt;span class=&quot;form-check-label&quot;&gt;ISS&lt;/span&gt;&lt;/label&gt;&lt;label class=&quot;form-check&quot;&gt;&lt;input class=&quot;form-check-input invoice-tax-check&quot; type=&quot;checkbox&quot; value=&quot;inss&quot;&gt;&lt;span class=&quot;form-check-label&quot;&gt;INSS&lt;/span&gt;&lt;/label&gt;&lt;/div&gt;&lt;/fieldset&gt;
       &lt;label class=&quot;form-label&quot;&gt;Cr&#233;dito fiscal&lt;select class=&quot;form-select&quot; id=&quot;invoice-credit&quot;&gt;&lt;option value=&quot;all&quot;&gt;Todos&lt;/option&gt;&lt;option value=&quot;review&quot;&gt;A avaliar&lt;/option&gt;&lt;option value=&quot;yes&quot;&gt;Pass&#237;vel de cr&#233;dito&lt;/option&gt;&lt;option value=&quot;no&quot;&gt;N&#227;o pass&#237;vel&lt;/option&gt;&lt;/select&gt;&lt;/label&gt;
       &lt;button class=&quot;btn btn-primary&quot; id=&quot;export-invoices&quot; type=&quot;button&quot;&gt;&lt;i data-lucide=&quot;file-spreadsheet&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Exportar Excel&lt;/button&gt;
       &lt;span class=&quot;text-small subtle&quot; id=&quot;invoice-export-feedback&quot; aria-live=&quot;polite&quot;&gt;&lt;/span&gt;
@@ -1431,8 +1452,8 @@ html&gt;body{padding:6px}&lt;/style&gt;
         select.value=[...select.options].some(option=&gt;option.value===current)?current:&#39;all&#39;;
       };
       const filteredEntryNotes=()=&gt;{
-        const month=$(&#39;#invoice-month&#39;).value,start=$(&#39;#invoice-start&#39;).value,end=$(&#39;#invoice-end&#39;).value,municipality=$(&#39;#invoice-municipality&#39;).value,retention=$(&#39;#invoice-retention&#39;).value,tax=$(&#39;#invoice-tax&#39;).value,credit=$(&#39;#invoice-credit&#39;).value;
-        return allEntryNotes().filter(d=&gt;(!month||d.issue.startsWith(month))&amp;&amp;(!start||d.issue&gt;=start)&amp;&amp;(!end||d.issue&lt;=end)&amp;&amp;(municipality===&#39;all&#39;||(municipality===&#39;outside-salvador&#39;?!/SALVADOR/i.test(d.municipality||&#39;&#39;):d.municipality===municipality))&amp;&amp;(retention===&#39;all&#39;||(retention===&#39;with&#39;?taxTotal(d.taxes)&gt;0:taxTotal(d.taxes)===0))&amp;&amp;(tax===&#39;all&#39;||(Number(d.taxes?.[tax])||0)&gt;0)&amp;&amp;(credit===&#39;all&#39;||(d.credit||&#39;review&#39;)===credit));
+        const month=$(&#39;#invoice-month&#39;).value,start=$(&#39;#invoice-start&#39;).value,end=$(&#39;#invoice-end&#39;).value,municipality=$(&#39;#invoice-municipality&#39;).value,retention=$(&#39;#invoice-retention&#39;).value,taxes=[...root.querySelectorAll(&#39;.invoice-tax-check:checked&#39;)].map(input=&gt;input.value),credit=$(&#39;#invoice-credit&#39;).value;
+        return allEntryNotes().filter(d=&gt;(!month||d.issue.startsWith(month))&amp;&amp;(!start||d.issue&gt;=start)&amp;&amp;(!end||d.issue&lt;=end)&amp;&amp;(municipality===&#39;all&#39;||(municipality===&#39;outside-salvador&#39;?!/SALVADOR/i.test(d.municipality||&#39;&#39;):d.municipality===municipality))&amp;&amp;(retention===&#39;all&#39;||(retention===&#39;with&#39;?taxTotal(d.taxes)&gt;0:taxTotal(d.taxes)===0))&amp;&amp;(!taxes.length||taxes.some(tax=&gt;(Number(d.taxes?.[tax])||0)&gt;0))&amp;&amp;(credit===&#39;all&#39;||(d.credit||&#39;review&#39;)===credit));
       };
       const renderEntryInvoices=()=&gt;{
         populateInvoiceMunicipalities();
@@ -1467,7 +1488,7 @@ html&gt;body{padding:6px}&lt;/style&gt;
           [&#39;Per&#237;odo de emiss&#227;o&#39;,`${formatDate($(&#39;#invoice-start&#39;).value)||&#39;In&#237;cio&#39;} a ${formatDate($(&#39;#invoice-end&#39;).value)||&#39;Fim&#39;}`],
           [&#39;Munic&#237;pio&#39;,selectedText(&#39;#invoice-municipality&#39;)],
           [&#39;Reten&#231;&#245;es&#39;,selectedText(&#39;#invoice-retention&#39;)],
-          [&#39;Imposto retido&#39;,selectedText(&#39;#invoice-tax&#39;)],
+          [&#39;Imposto retido&#39;,[...root.querySelectorAll(&#39;.invoice-tax-check:checked&#39;)].map(input=&gt;input.value.toUpperCase()).join(&#39;, &#39;)||&#39;Todos os impostos&#39;],
           [&#39;Cr&#233;dito fiscal&#39;,selectedText(&#39;#invoice-credit&#39;)]
         ],headers=[&#39;Emiss&#227;o&#39;,&#39;AP&#39;,&#39;Fornecedor&#39;,&#39;Documento fiscal&#39;,&#39;Munic&#237;pio&#39;,&#39;CNAE&#39;,&#39;Atividade&#39;,&#39;Tipo de pagamento&#39;,&#39;Data de pagamento&#39;,&#39;Valor bruto&#39;,&#39;IR&#39;,&#39;PIS&#39;,&#39;COFINS&#39;,&#39;CSLL&#39;,&#39;ISS&#39;,&#39;INSS&#39;,&#39;Total retido&#39;,&#39;Valor l&#237;quido&#39;,&#39;Cr&#233;dito fiscal&#39;],creditLabels={review:&#39;A avaliar&#39;,yes:&#39;Pass&#237;vel de cr&#233;dito&#39;,no:&#39;N&#227;o pass&#237;vel&#39;},headerRow=9;
         let rows=`&lt;row r=&quot;1&quot;&gt;${xlsxCell(&#39;Relat&#243;rio de notas de entrada&#39;,1,1,3)}&lt;/row&gt;`;
@@ -1489,7 +1510,7 @@ html&gt;body{padding:6px}&lt;/style&gt;
       const exportEntryInvoices=()=&gt;{
         const items=filteredEntryNotes(),feedback=$(&#39;#invoice-export-feedback&#39;);
         if(!items.length){feedback.textContent=&#39;Nenhuma nota encontrada para exportar com esses filtros.&#39;;return;}
-        const month=$(&#39;#invoice-month&#39;).value||&#39;periodo-selecionado&#39;,credit=$(&#39;#invoice-credit&#39;).value,tax=$(&#39;#invoice-tax&#39;).value,blob=buildInvoiceWorkbook(items),url=URL.createObjectURL(blob),link=document.createElement(&#39;a&#39;);
+        const month=$(&#39;#invoice-month&#39;).value||&#39;periodo-selecionado&#39;,credit=$(&#39;#invoice-credit&#39;).value,tax=[...root.querySelectorAll(&#39;.invoice-tax-check:checked&#39;)].map(input=&gt;input.value).join(&#39;-&#39;)||&#39;todos&#39;,blob=buildInvoiceWorkbook(items),url=URL.createObjectURL(blob),link=document.createElement(&#39;a&#39;);
         link.href=url;link.download=`relatorio-notas-entrada_${month}_${credit}_${tax}.xlsx`;link.click();setTimeout(()=&gt;URL.revokeObjectURL(url),1000);feedback.textContent=`Relat&#243;rio Excel gerado com ${items.length} nota${items.length===1?&#39;&#39;:&#39;s&#39;}.`;
       };
       const filteredTaxes=()=&gt;{ const start=$(&#39;#tax-start&#39;).value,end=$(&#39;#tax-end&#39;).value,type=$(&#39;#tax-type&#39;).value,method=$(&#39;#tax-method&#39;).value; return approved.filter(d=&gt;(!start||d.pay&gt;=start)&amp;&amp;(!end||d.pay&lt;=end)&amp;&amp;(type===&#39;all&#39;||d.type===type)&amp;&amp;(method===&#39;all&#39;||d.method===method)); };
@@ -1541,7 +1562,8 @@ html&gt;body{padding:6px}&lt;/style&gt;
       $(&#39;#download-ap&#39;).addEventListener(&#39;click&#39;,()=&gt;{capture();const d=docs[selected],baseName=fileName(d),original=d.files?.[0];let url,name;if(original){const extension=original.name.match(/\.[^.]+$/)?.[0]?.toUpperCase()||&#39;.PDF&#39;;name=baseName.replace(/\.PDF$/,extension);url=original.url;}else{const nl=String.fromCharCode(10);name=baseName;const body=[d.id,d.supplier,d.invoice,`VALOR LIQUIDO: R$ ${formatMoney(d.net)}`,&#39;ARQUIVO DEMONSTRATIVO DO PROTOTIPO&#39;].join(nl);url=URL.createObjectURL(makePdf(body));setTimeout(()=&gt;URL.revokeObjectURL(url),1000);}const a=document.createElement(&#39;a&#39;);a.href=url;a.download=name;a.click();$(&#39;#feedback&#39;).textContent=`Download preparado com o nome: ${name}`;});
       root.querySelectorAll(&#39;[data-view]&#39;).forEach(btn=&gt;btn.addEventListener(&#39;click&#39;,()=&gt;{root.querySelectorAll(&#39;[data-view]&#39;).forEach(b=&gt;{const active=b===btn;b.classList.toggle(&#39;btn-primary&#39;,active);b.setAttribute(&#39;aria-pressed&#39;,String(active));});root.querySelectorAll(&#39;.view&#39;).forEach(v=&gt;v.classList.remove(&#39;is-active&#39;));$(`#view-${btn.dataset.view}`).classList.add(&#39;is-active&#39;);if(btn.dataset.view===&#39;invoices&#39;)renderEntryInvoices();if(btn.dataset.view===&#39;taxes&#39;)renderTaxes();}));
       [&#39;#period-start&#39;,&#39;#period-end&#39;,&#39;#approved-item&#39;,&#39;#approved-type&#39;,&#39;#approved-method&#39;].forEach(s=&gt;$(s).addEventListener(&#39;change&#39;,renderAnalytics));
-      [&#39;#invoice-month&#39;,&#39;#invoice-start&#39;,&#39;#invoice-end&#39;,&#39;#invoice-municipality&#39;,&#39;#invoice-retention&#39;,&#39;#invoice-tax&#39;,&#39;#invoice-credit&#39;].forEach(s=&gt;$(s).addEventListener(&#39;change&#39;,renderEntryInvoices));
+      [&#39;#invoice-month&#39;,&#39;#invoice-start&#39;,&#39;#invoice-end&#39;,&#39;#invoice-municipality&#39;,&#39;#invoice-retention&#39;,&#39;#invoice-credit&#39;].forEach(s=&gt;$(s).addEventListener(&#39;change&#39;,renderEntryInvoices));
+      root.querySelectorAll(&#39;.invoice-tax-check&#39;).forEach(input=&gt;input.addEventListener(&#39;change&#39;,renderEntryInvoices));
       $(&#39;#export-invoices&#39;).addEventListener(&#39;click&#39;,exportEntryInvoices);
       $(&#39;#invoice-body&#39;).addEventListener(&#39;change&#39;,e=&gt;{if(!e.target.classList.contains(&#39;credit-decision&#39;))return;const record=[...docs,...approved].find(d=&gt;d.id===e.target.dataset.documentId);if(record){record.credit=e.target.value;renderEntryInvoices();}});
       [&#39;#tax-start&#39;,&#39;#tax-end&#39;,&#39;#tax-type&#39;,&#39;#tax-method&#39;].forEach(s=&gt;$(s).addEventListener(&#39;change&#39;,renderTaxes));
