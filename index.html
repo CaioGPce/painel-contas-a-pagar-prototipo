@@ -870,7 +870,8 @@ html&gt;body{padding:6px}&lt;/style&gt;
     #gp-payables .entry-notes-table .credit-check-wrap { display:inline-flex; align-items:center; justify-content:center; min-width:24px; white-space:nowrap; }
     #gp-payables .entry-notes-table .credit-cell { text-align:center; vertical-align:middle; }
     #gp-payables .entry-notes-table .credit-decision { width:15px; height:15px; flex:0 0 auto; margin:0; border:2px solid rgb(73 99 128); box-shadow:0 0 0 1px rgb(255 255 255 / 80%); }
-    #gp-payables .entry-notes-table .credit-decision:checked { border-color:rgb(38 130 72); }
+    #gp-payables .entry-notes-table .credit-decision:checked { border-color:rgb(38 130 72); background:rgb(38 130 72); }
+    #gp-payables .entry-notes-table .credit-decision:checked::before { display:block; width:100%; height:100%; background:rgb(255 255 255); content:&quot;&quot;; mask:var(--checkmark-image) center / 12px 12px no-repeat; }
     #gp-payables .entry-notes-table .credit-check-label { color:var(--muted-foreground); font-size:9px; }
     #gp-payables .credit-checkbox-field { min-height:29px; margin-top:2px; padding:0 8px; border:1px solid var(--border); border-radius:7px; background:var(--background); }
     #gp-payables .credit-checkbox-field #credit-status { width:15px; height:15px; margin:0 auto; border:2px solid rgb(73 99 128); box-shadow:0 0 0 1px rgb(255 255 255 / 80%); }
@@ -1182,7 +1183,8 @@ html&gt;body{padding:6px}&lt;/style&gt;
     }
     #gp-payables .entry-notes-table th { font-size:9px; }
     #gp-payables .entry-notes-table :is(th,td) { padding:5px 4px; }
-    #gp-payables .entry-notes-table tbody tr.credit-eligible td { background:rgb(237 249 241); }
+    #gp-payables .entry-notes-table tbody tr.credit-eligible td { background:rgb(226 244 232); }
+    #gp-payables .entry-notes-table tbody tr.credit-eligible:hover td { background:rgb(219 240 227); }
     #gp-payables:has(.detail.is-open)::before { background:rgb(25 38 53 / 48%); backdrop-filter:blur(2px); }
     #gp-payables .detail {
       width:min(1220px,calc(100% - 36px));
